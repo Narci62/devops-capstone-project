@@ -1,15 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
 """
 Account API Service Test Suite
 
@@ -37,6 +25,7 @@ HTTPS_ENVIRON = {'wsgi.url_scheme': 'https'}
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
+
 class TestAccountService(TestCase):
     """Account Service Tests"""
 
@@ -165,12 +154,12 @@ class TestAccountService(TestCase):
 
     def test_update_account(self):
         """It should Update an existing Account"""
-        #create an Account to update
+        # create an Account to update
         test_account = AccountFactory()
         resp = self.client.post(BASE_URL, json=test_account.serialize())
         self.assertEqual(resp.status_code, status.HTTP_201_CREATED)
 
-        #update the account
+        # update the account
         new_account = resp.get_json()
         new_account["name"] = "Something Known"
         resp = self.client.put(f"{BASE_URL}/{new_account['id']}", json=new_account)
@@ -201,4 +190,3 @@ class TestAccountService(TestCase):
         }
         for key, value in headers.items():
             self.assertEqual(response.headers.get(key), value)
-
